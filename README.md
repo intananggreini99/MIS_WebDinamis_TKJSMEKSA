@@ -199,4 +199,3 @@ Hak akses halaman :
 
 © 2024 **Intan Dwi Anggreini**  
 Teknik Jaringan Komputer dan Telekomunikasi — SMK Negeri 1 Kediri  
-**All Rights Reserved.**
