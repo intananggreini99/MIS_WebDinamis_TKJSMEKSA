@@ -1,0 +1,72 @@
+name: web-mis-sekolah
+
+services:
+  # Aplikasi PHP + Apache
+  web:
+    build: .
+    image: web-mis-sekolah:latest
+    container_name: mis-web
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: sekolah
+      DB_USER: ${DB_USER:-mis}
+      DB_PASS: ${DB_PASS:-mis123}
+      PROFILE_URL: ${PROFILE_URL:-#}
+      TZ: Asia/Jakarta
+    volumes:
+      # foto guru & gambar agenda hasil upload tetap tersimpan walau container dibuat ulang
+      - foto_guru:/var/www/html/sekolah/guru/foto
+      - gambar_agenda:/var/www/html/sekolah/agenda/gambar
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Database MySQL
+  db:
+    image: mysql:8.0
+    container_name: mis-db
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-root123}
+      MYSQL_DATABASE: sekolah
+      MYSQL_USER: ${DB_USER:-mis}
+      MYSQL_PASSWORD: ${DB_PASS:-mis123}
+      TZ: Asia/Jakarta
+    volumes:
+      - db_data:/var/lib/mysql
+      # dijalankan otomatis HANYA saat volume db_data masih kosong (pertama kali)
+      - ./database/sekolah.sql:/docker-entrypoint-initdb.d/01-sekolah.sql:ro
+    # Buka komentar di bawah jika ingin akses MySQL dari luar (mis. HeidiSQL/DBeaver)
+    # ports:
+    #   - "3307:3306"
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    restart: unless-stopped
+
+  # phpMyAdmin untuk mengelola database lewat browser
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: mis-phpmyadmin
+    ports:
+      - "${PMA_PORT:-8081}:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 64M
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  foto_guru:
+  gambar_agenda:
