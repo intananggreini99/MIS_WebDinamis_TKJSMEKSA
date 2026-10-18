@@ -19,7 +19,7 @@ Aplikasi ini dibuat dengan **PHP native + MySQL + Bootstrap** dan menerapkan ope
 
 ### Halaman Guest (Siswa & Guru)
 
-Hanya-baca (Read): Daftar Pendidik & Tendik, Daftar Siswa, Jadwal Mata Pelajaran, Agenda Tahunan, dan tombol **About Developer** yang menautkan ke situs profil developer (proyek terpisah).
+Hanya-baca (Read): Daftar Pendidik & Tendik, Daftar Siswa, Jadwal Mata Pelajaran, dan Agenda Tahunan.
 
 ---
 
