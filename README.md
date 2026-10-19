@@ -1,4 +1,4 @@
-# Web MIS Sekolah — SIM TKJ SMKN 1 Kediri
+# Web MIS TKJ SMKN 1 Kediri
 
 Sistem Informasi Manajemen (SIM) berbasis web untuk program keahlian **Teknik Jaringan Komputer (TKJ) SMK Negeri 1 Kediri**.
 Aplikasi ini dibuat dengan **PHP native + MySQL + Bootstrap** dan menerapkan operasi **CRUD** (Create, Read, Update, Delete) untuk data siswa, guru, mata pelajaran, agenda tahunan, dan akun admin.
