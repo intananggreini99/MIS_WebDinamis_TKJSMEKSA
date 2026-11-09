@@ -3,6 +3,8 @@
 Sistem Informasi Manajemen (SIM) berbasis web untuk program keahlian **Teknik Jaringan Komputer (TKJ) SMK Negeri 1 Kediri**.
 Aplikasi ini dibuat dengan **PHP native + MySQL + Bootstrap** dan menerapkan operasi **CRUD** (Create, Read, Update, Delete) untuk data siswa, guru, mata pelajaran, agenda tahunan, dan akun admin.
 
+Proyek ini berasal dari *Laporan Praktikum Pembuatan Website Dinamis dengan Menggunakan XAMPP & Bootstrap*. Versi ini sudah dipisahkan dari web profil pribadi dan dibungkus dengan **Docker**, sehingga bisa dijalankan dengan satu perintah tanpa XAMPP.
+
 ---
 
 ## Fitur
@@ -23,6 +25,139 @@ Hanya-baca (Read): Daftar Pendidik & Tendik, Daftar Siswa, Jadwal Mata Pelajaran
 
 ---
 
+## Dokumentasi Tampilan
+
+
+### Struktur halaman
+
+Halaman admin memakai lima bagian: **header**, **navbar**, **sidebar**, **body**, dan **footer**.
+
+![Struktur halaman admin](docs/screenshots/01-struktur-halaman-admin.jpg)
+
+Halaman guest memakai susunan yang sama tanpa sidebar, dengan navbar ikon di bagian atas.
+
+![Struktur halaman guest](docs/screenshots/18-struktur-halaman-guest.jpg)
+
+### Halaman Admin (SIM)
+
+Dashboard setelah login sebagai admin — `sekolah/index.php`
+
+![Dashboard admin](docs/screenshots/02-dashboard-admin.jpg)
+
+<details>
+<summary><b>Modul User Admin</b> — daftar, tambah, ubah password</summary>
+
+**List User** — `user/list-user.php`
+
+![List User](docs/screenshots/03-list-user.png)
+
+**Tambah Data User** — `user/add-user.php`
+
+![Tambah User](docs/screenshots/04-tambah-user.png)
+
+**Ubah Password User** — `user/edit-user.php`
+
+![Ubah Password User](docs/screenshots/05-ubah-password-user.png)
+
+</details>
+
+<details>
+<summary><b>Modul Siswa</b> — daftar, tambah, ubah</summary>
+
+**Daftar Siswa** — `siswa/datasiswa.php`
+
+![Daftar Siswa](docs/screenshots/06-daftar-siswa.png)
+
+**Tambah Data Siswa** — `siswa/addsiswa.php`
+
+![Tambah Data Siswa](docs/screenshots/07-tambah-siswa.png)
+
+**Ubah Data Siswa** — `siswa/ubahdata.php`
+
+![Ubah Data Siswa](docs/screenshots/08-ubah-siswa.png)
+
+</details>
+
+<details>
+<summary><b>Modul Pendidik &amp; Tendik</b> — daftar, tambah, ubah (dengan upload foto)</summary>
+
+**Daftar Guru** — `guru/dataguru.php`
+
+![Daftar Guru](docs/screenshots/09-daftar-guru.png)
+
+**Tambah Data Pendidik & Tendik** — `guru/addguru.php`
+
+![Tambah Data Guru](docs/screenshots/10-tambah-guru.png)
+
+**Ubah Data Pendidik & Tendik** — `guru/ubahdata.php`. Foto lama tetap tampil; kalau tidak memilih file baru, foto itu yang dipakai.
+
+![Ubah Data Guru](docs/screenshots/11-ubah-guru.png)
+
+</details>
+
+<details>
+<summary><b>Modul Mata Pelajaran</b> — daftar, tambah, ubah</summary>
+
+**Daftar Mata Pelajaran** — `mapel/datamapel.php`
+
+![Daftar Mata Pelajaran](docs/screenshots/12-daftar-mapel.png)
+
+**Tambah Mata Pelajaran** — `mapel/addmapel.php`
+
+![Tambah Mata Pelajaran](docs/screenshots/13-tambah-mapel.png)
+
+**Ubah Data Mata Pelajaran** — `mapel/ubahmapel.php`
+
+![Ubah Mata Pelajaran](docs/screenshots/14-ubah-mapel.png)
+
+</details>
+
+<details>
+<summary><b>Modul Agenda Tahunan</b> — daftar, tambah, ubah (dengan upload dokumentasi)</summary>
+
+**Daftar Agenda Tahunan** — `agenda/agenda.php`
+
+![Daftar Agenda Tahunan](docs/screenshots/15-daftar-agenda.jpg)
+
+**Tambah Agenda Tahunan** — `agenda/addagenda.php`
+
+![Tambah Agenda Tahunan](docs/screenshots/16-tambah-agenda.png)
+
+**Ubah Data Agenda Tahunan** — `agenda/ubahagenda.php`
+
+![Ubah Agenda Tahunan](docs/screenshots/17-ubah-agenda.png)
+
+</details>
+
+### Halaman Guest (Siswa & Guru)
+
+Beranda guest — `sekolah/guest/index.php`
+
+![Beranda Guest](docs/screenshots/19-guest-beranda.jpg)
+
+<details>
+<summary><b>Halaman data guest</b> — pendidik &amp; tendik, siswa, mata pelajaran, agenda</summary>
+
+**Pendidik & Tendik** — `guest/guru/index.php`
+
+![Guest Pendidik & Tendik](docs/screenshots/20-guest-guru.jpg)
+
+**Daftar Siswa** — `guest/siswa/index.php`
+
+![Guest Daftar Siswa](docs/screenshots/21-guest-siswa.png)
+
+**Mata Pelajaran** — `guest/mapel/index.php`
+
+![Guest Mata Pelajaran](docs/screenshots/22-guest-mapel.png)
+
+**Agenda Tahunan** — `guest/agenda/index.php`
+
+![Guest Agenda Tahunan](docs/screenshots/23-guest-agenda.jpg)
+
+</details>
+
+---
+
 ## Teknologi
 
 | Bagian | Teknologi |
@@ -33,40 +168,6 @@ Hanya-baca (Read): Daftar Pendidik & Tendik, Daftar Siswa, Jadwal Mata Pelajaran
 | Web server | Apache (image resmi `php:8.2-apache`) |
 | Container | Docker + Docker Compose |
 | Manajemen DB | phpMyAdmin 5.2 |
-
----
-
-## Struktur Folder
-
-```
-web-mis-sekolah/
-├── Dockerfile               # image PHP 8.2 + Apache + mysqli
-├── docker-compose.yml       # service: web, db (MySQL), phpmyadmin
-├── .env.example             # contoh pengaturan port & password
-├── docker/
-│   └── php.ini              # batas upload, zona waktu, log error
-├── database/
-│   ├── sekolah.sql          # CREATE DATABASE + CREATE TABLE + data awal
-│   └── query-crud.sql       # kumpulan query INSERT/SELECT/UPDATE/DELETE
-└── src/                     # = isi folder htdocs (document root)
-    ├── index.php            # halaman login utama
-    ├── login.php            # proses login (tabel allin / user)
-    ├── logout.php           # hapus session
-    ├── koneksi.php
-    ├── home.png
-    └── sekolah/
-        ├── config.php       # koneksi DB, $main_url, proteksi login
-        ├── index.php        # dashboard admin
-        ├── auth/            # login khusus admin (tabel user)
-        ├── user/            # CRUD user admin
-        ├── siswa/           # CRUD siswa
-        ├── guru/            # CRUD guru  (+ foto/  hasil upload)
-        ├── mapel/           # CRUD mata pelajaran
-        ├── agenda/          # CRUD agenda (+ gambar/ hasil upload)
-        ├── guest/           # halaman guest (siswa & guru)
-        ├── template/        # header, navbar, sidebar, footer admin
-        └── asset/           # CSS/JS SB Admin & gambar
-```
 
 ---
 
@@ -93,6 +194,8 @@ docker compose up -d --build
 docker compose ps
 ```
 
+Pada saat pertama dijalankan, MySQL otomatis mengimpor `database/sekolah.sql` (membutuhkan ±20–30 detik).
+
 | Layanan | Alamat |
 |---|---|
 | Web MIS | http://localhost:8080 |
@@ -108,8 +211,6 @@ Login di http://localhost:8080 :
 |---|---|---|---|
 | Admin | `admin@tkjsmeksa.com` | `admin123` | Halaman SIM (CRUD) |
 | Admin (tabel `user`) | `admin` | `admin123` | Halaman SIM (CRUD) |
-| Guru | email guru, mis. `dodysetiono@email.com` | `guru123` | Halaman Guest |
-| Siswa | email siswa, mis. `intan@tkjsmeksa.com` | `ida15` | Halaman Guest |
 
 ---
 
@@ -128,9 +229,9 @@ Nama database: **`sekolah`** (charset `utf8mb4`).
 
 ---
 
-## Command Docker yang Sering Dipakai
+## Docker Command
 
-| Keperluan | Perintah |
+| Keperluan | Command |
 |---|---|
 | Menjalankan | `docker compose up -d` |
 | Melihat log aplikasi / error PHP | `docker compose logs -f web` |
@@ -140,6 +241,12 @@ Nama database: **`sekolah`** (charset `utf8mb4`).
 | Backup database | `docker compose exec db mysqldump -umis -pmis123 sekolah > backup.sql` |
 | Restore database | `docker compose exec -T db mysql -umis -pmis123 sekolah < backup.sql` |
 | Masuk ke konsol MySQL | `docker compose exec db mysql -umis -pmis123 sekolah` |
+
+Data tersimpan di Docker volume:
+
+- `db_data` — isi database MySQL
+- `foto_guru` — foto guru hasil upload (`sekolah/guru/foto`)
+- `gambar_agenda` — dokumentasi agenda hasil upload (`sekolah/agenda/gambar`)
 
 ---
 
@@ -187,7 +294,7 @@ flowchart LR
     G --> G5[About Developer<br/>→ situs profil]
 ```
 
-Hak akses halaman :
+Hak akses halaman diatur di `src/sekolah/config.php`:
 
 | Halaman | Siapa yang boleh |
 |---|---|
@@ -197,6 +304,19 @@ Hak akses halaman :
 
 ---
 
-© 2024 **Intan Dwi Anggreini**  
-Teknik Jaringan Komputer dan Telekomunikasi — SMK Negeri 1 Kediri  
-**All Rights Reserved.**
+## Environment Variable
+
+| Variabel | Default | Keterangan |
+|---|---|---|
+| `WEB_PORT` | `8080` | Port Web MIS di komputer host |
+| `PMA_PORT` | `8081` | Port phpMyAdmin |
+| `DB_USER` | `mis` | User MySQL untuk aplikasi |
+| `DB_PASS` | `mis123` | Password user MySQL aplikasi |
+| `DB_ROOT_PASS` | `root123` | Password root MySQL |
+| `PROFILE_URL` | `#` | Alamat situs profil developer untuk tombol **About Developer** |
+
+
+## Penyusun
+
+**Intan Dwi Anggreini** — Teknik Jaringan Komputer dan Telekomunikasi, SMK Negeri 1 Kediri
+Jl. Veteran No. 9, Mojoroto, Kota Kediri, Jawa Timur

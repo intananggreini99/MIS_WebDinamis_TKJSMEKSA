@@ -133,9 +133,3 @@ INSERT INTO user (id, username, password) VALUES
 --   siswa -> email + password dari tabel siswa
 INSERT INTO allin (email, password, level) VALUES
 ('admin@tkjsmeksa.com', 'admin123', 'admin');
-
-INSERT INTO allin (email, password, level)
-SELECT email, 'guru123', 'guru' FROM guru;
-
-INSERT INTO allin (email, password, level)
-SELECT email, password, 'siswa' FROM siswa WHERE password IS NOT NULL;
